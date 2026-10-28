@@ -322,8 +322,8 @@ const style=document.createElement('style');style.textContent='.library-dashboar
 const noteSelect=document.getElementById('noteLabelMode')||document.querySelector('select');
 const noteLabel=[...document.querySelectorAll('label')].find(l=>l.textContent.includes('Nomes das notas'));
 const handsLabel=[...document.querySelectorAll('label')].find(l=>l.textContent.includes('Estudar:'));
-if(noteLabel){noteLabel.id='noteModeRow';noteLabel.innerHTML=noteLabel.innerHTML.replace('♪ Nomes das notas','♫ Nomes das notas');}
-if(handsLabel){handsLabel.id='handsModeRow';handsLabel.innerHTML=handsLabel.innerHTML.replace('✋ Estudar:','♬ Estudar:');}
+if(noteLabel){noteLabel.id='noteModeRow';if(noteLabel.firstChild?.nodeType===3)noteLabel.firstChild.textContent=noteLabel.firstChild.textContent.replace('♪','♫');}
+if(handsLabel){handsLabel.id='handsModeRow';if(handsLabel.firstChild?.nodeType===3)handsLabel.firstChild.textContent=handsLabel.firstChild.textContent.replace('✋','♬');}
 const mic=document.querySelector('label[for="listenSetting"]');
 if(mic)mic.textContent='◉ Escuta';
 })();
