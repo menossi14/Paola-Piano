@@ -159,7 +159,7 @@ const orientation=document.getElementById('landscape');orientation.textContent='
 const focus=document.getElementById('focus');focus.textContent='✕';focus.title='Sair do estudo';focus.setAttribute('aria-label','Sair do estudo');toolbar.append(focus);
 const originalFocus=focus.onclick;focus.onclick=()=>{originalFocus();focus.textContent=document.body.classList.contains('focus-mode')?'✕':'⛶'};
 const originalPlay=playBtn.onclick;playBtn.onclick=()=>{originalPlay();playBtn.textContent=playing?'Ⅱ':'▶'};
-const originalAB=document.getElementById('repeatAB').onclick;document.getElementById('repeatAB').onclick=()=>{originalAB();document.getElementById('repeatAB').textContent=repeat?'↻':'↻'};
+const originalAB=document.getElementById('repeatAB').onclick;document.getElementById('repeatAB').onclick=()=>{originalAB();document.getElementById('repeatAB').textContent='↻'};
 document.getElementById('resetAB').addEventListener('click',()=>{playBtn.textContent=playing?'Ⅱ':'▶'});
 // Fullscreen is needed by Chrome Android for programmatic orientation lock; avoid it until the first attempt fails.
 let rotated=false;
