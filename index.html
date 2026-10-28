@@ -23,12 +23,26 @@ body.focus-mode .study>div:nth-child(2){display:block!important;height:auto!impo
 body.focus-mode .study #keys{height:25svh!important;min-height:110px!important;max-height:235px!important}
 body.focus-mode .study .transport{margin:8px 0!important}
 @media(orientation:portrait){body.focus-mode .study #sheet.paper{height:34svh!important;min-height:225px!important}body.focus-mode .study #keys{height:19svh!important;min-height:125px!important}}
-.key{font-size:clamp(7px,1.15vw,12px);white-space:nowrap}.key.black{font-size:clamp(6px,.75vw,10px);color:white;padding-bottom:4px;align-items:end;justify-content:center}#noteNow{display:none} </style></head><body><header><div class="logo">🎹</div><div><h1>Paola Piano</h1><small>Suas músicas. Seu ritmo.</small></div></header><main>
+.key{font-size:clamp(7px,1.15vw,12px);white-space:nowrap}.key.black{font-size:clamp(6px,.75vw,10px);color:white;padding-bottom:4px;align-items:end;justify-content:center}#noteNow{display:none} 
+/* 0.9.1 compact fixed study toolbar */
+body.focus-mode .study-section>.actions:first-child{position:sticky;top:0;z-index:30;background:#151925;padding:5px 7px;margin:0 0 5px!important;display:flex;gap:7px;align-items:center;flex-wrap:wrap}
+#studyToolbar{display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin-left:auto}
+#studyToolbar button{min-width:37px;min-height:37px;padding:6px 9px;font-size:16px}
+#studyToolbar .active-tool{background:#805be8;color:white}
+#handPopup{position:absolute;right:100px;top:calc(100% + 4px);padding:12px;border:1px solid #525c76;border-radius:12px;background:#22293a;box-shadow:0 10px 25px #0008;z-index:40;display:flex;gap:6px;flex-direction:column}
+#handPopup[hidden]{display:none}#handPopup button{min-width:175px;text-align:left}
+body.focus-mode .study #sheet.paper{height:49svh!important;min-height:205px!important}
+body.focus-mode .study #keys{height:19svh!important;min-height:83px!important;max-height:170px!important}
+body.focus-mode .study .transport{display:none!important}
+body.focus-mode .study .progress{margin:4px 0!important}
+body.focus-mode .study #score svg{max-width:100%;height:auto}
+@media(orientation:landscape){body.focus-mode .study #sheet.paper{height:54svh!important;min-height:160px!important}body.focus-mode .study #keys{height:19svh!important;min-height:75px!important}body.focus-mode #pieceTitle{font-size:clamp(13px,2vw,20px)}}
+</style></head><body><header><div class="logo">🎹</div><div><h1>Paola Piano</h1><small>Suas músicas. Seu ritmo.</small></div></header><main>
 <section class="nonstudy"><div class="actions" id="installArea" style="margin-bottom:12px"><button class="primary" id="install" hidden>📲 Instalar aplicativo</button><span class="note" id="installHint">Para instalar com ícone, abra esta página publicada em HTTPS no Chrome Android.</span></div><h2>Minha biblioteca</h2><div class="actions"><button class="primary" id="addMusic" aria-expanded="false" aria-controls="addPanel">＋ Adicionar música</button><button id="libraryToggle">♫ Biblioteca</button><button id="demo" hidden>▶ Música de demonstração</button></div><div id="addPanel" class="add-panel" hidden><h3>Adicionar à biblioteca</h3><p class="note">Procure uma partitura disponibilizada legalmente, baixe o MIDI ou MusicXML na fonte e escolha o arquivo aqui. Depois ficará na sua biblioteca.</p><input id="query" type="search" placeholder="Nome da música (ex.: November Rain)" aria-label="Nome da música" value="November Rain"><div class="actions" style="margin-top:9px"><button id="mutopia">Pesquisar no Mutopia</button><button id="imslp">Pesquisar no IMSLP</button><button id="onlineSearch">Pesquisar MIDI na web</button></div><div class="actions" style="margin-top:14px"><label class="filebtn">📁 Escolher arquivo para salvar<input id="upload" type="file" accept=".mid,.midi,.xml,.musicxml"></label></div><p class="tip">A pesquisa abre um site externo; não baixa músicas automaticamente. O arquivo precisa estar autorizado para download e uso.</p></div><div id="library" class="library-list" hidden></div><p class="tip" id="libraryHint" hidden>Os arquivos importados ficam salvos neste navegador do celular (se o armazenamento estiver disponível). November Rain aparece como referência externa até você importar um arquivo autorizado.</p><div id="message" class="status" role="status">Pronto para começar.</div></section>
 <section class="study-section"><div class="actions" style="justify-content:space-between"><h2 style="margin:0" id="pieceTitle">Exercício de demonstração</h2><div class="actions"><span id="noteNow" class="chip">—</span><button id="landscape" aria-label="Solicitar tela horizontal">↔ Tela deitada</button><button id="focus" aria-label="Ativar modo estudo">⛶ Modo estudo</button></div></div>
 <div class="study"><div id="sheet" class="paper" aria-label="Partitura na parte superior"><div id="score"></div></div><div><h2 style="margin-bottom:5px">Teclado guiado <span class="chip">Dó3–Si5</span></h2><div id="keys" aria-label="Teclado virtual na parte inferior"></div></div><div class="transport"><button class="primary" id="play">▶ Tocar</button><button id="stop">■ Parar</button><span class="time" id="clock">0:00 / 0:00</span></div><input class="progress" type="range" id="seek" min="0" max="1000" value="0" aria-label="Posição da música"><label class="range">Velocidade <input id="speed" type="range" min="0.5" max="1.5" step="0.1" value="1"><strong id="speedLabel">1.0×</strong></label></div>
 </section>
-<section class="nonstudy"><details><summary>ⓘ Ajuda e informações</summary><p class="note">Paola Piano — Alfa 0.9.0</p><h2>Sobre esta versão</h2><p class="note">Funciona como protótipo diretamente no navegador, inclusive tocando as teclas virtuais. A reprodução usa sintetizador simples e não é o som de um piano gravado. Ainda não há reconhecimento do piano físico, login, sincronização da biblioteca entre aparelhos nem geração automática de partitura a partir de MP3. Para MusicXML completo, a biblioteca OpenSheetMusicDisplay é carregada pela internet.</p><p class="source">Fontes de repertório: <a href="https://www.mutopiaproject.org/" target="_blank" rel="noopener">Mutopia Project</a> · <a href="https://imslp.org/" target="_blank" rel="noopener">IMSLP</a>.</p></details></section></main>
+<section class="nonstudy"><details><summary>ⓘ Ajuda e informações</summary><p class="note">Paola Piano — Alfa 0.9.1</p><h2>Sobre esta versão</h2><p class="note">Funciona como protótipo diretamente no navegador, inclusive tocando as teclas virtuais. A reprodução usa sintetizador simples e não é o som de um piano gravado. Ainda não há reconhecimento do piano físico, login, sincronização da biblioteca entre aparelhos nem geração automática de partitura a partir de MP3. Para MusicXML completo, a biblioteca OpenSheetMusicDisplay é carregada pela internet.</p><p class="source">Fontes de repertório: <a href="https://www.mutopiaproject.org/" target="_blank" rel="noopener">Mutopia Project</a> · <a href="https://imslp.org/" target="_blank" rel="noopener">IMSLP</a>.</p></details></section></main>
 <script src="https://unpkg.com/opensheetmusicdisplay@1.9.0/build/opensheetmusicdisplay.min.js"></script><script>
 const $=id=>document.getElementById(id);let allNotes=[],handMode='both',notes=[],duration=0,playing=false,position=0,startAt=0,animation=0,audio,voices=[],scoreMode='simple',osmd=null,xmlContent=null;const names=['Dó','Dó♯','Ré','Ré♯','Mi','Fá','Fá♯','Sol','Sol♯','Lá','Lá♯','Si'];const noteName=n=>names[n%12]+(Math.floor(n/12)-1);const status=s=>$('message').textContent=s;const freq=n=>440*Math.pow(2,(n-69)/12);let speed=1;let db=null;const storeName='songs';const catalog=[{title:'November Rain — Piano Cover',artist:'Guns N’ Roses',url:'https://onlinesequencer.net/4793240'}];
 function initAudio(){audio??=new(window.AudioContext||window.webkitAudioContext)();if(audio.state==='suspended')audio.resume()}
@@ -121,5 +135,37 @@ document.getElementById('markA').onclick=()=>{A=position;show('Início: '+A.toFi
  
  function centerActive(){const el=document.querySelector('#score g[data-index] ellipse[fill="#805be8"]');if(!el)return;const svg=el.ownerSVGElement;if(!svg?.viewBox?.baseVal?.width)return;const ratio=svg.getBoundingClientRect().width/svg.viewBox.baseVal.width;const x=el.cx.baseVal.value*ratio;const y=el.cy.baseVal.value*ratio;const tx=Math.max(0,x-sheet.clientWidth*.43);const ty=Math.max(0,y-sheet.clientHeight*.43);sheet.scrollLeft+=(tx-sheet.scrollLeft)*.10;sheet.scrollTop+=(ty-sheet.scrollTop)*.10}
  function scrollLoop(){if(playing)centerActive();requestAnimationFrame(scrollLoop)}requestAnimationFrame(scrollLoop);
+})();
+</script><script>
+(()=>{
+const header=document.querySelector('.study-section>.actions'),right=header?.querySelector('.actions');if(!header||!right)return;
+const toolbar=document.createElement('div');toolbar.id='studyToolbar';right.prepend(toolbar);
+const button=(id,label,title)=>{const el=document.getElementById(id);if(!el)return null;el.textContent=label;el.title=title;el.setAttribute('aria-label',title);toolbar.append(el);return el};
+const playBtn=button('play','▶','Tocar ou pausar');
+button('stop','⏹','Parar');
+button('markA','A','Marcar início do trecho');
+button('markB','B','Marcar fim do trecho');
+button('repeatAB','↻','Repetir trecho');
+button('resetAB','✕','Limpar marcações');
+const handBtn=document.createElement('button');handBtn.id='handsButton';handBtn.textContent='✋';handBtn.title='Escolher mão';handBtn.setAttribute('aria-label','Escolher mão para estudo');handBtn.setAttribute('aria-expanded','false');
+const popup=document.createElement('div');popup.id='handPopup';popup.hidden=true;popup.setAttribute('role','group');popup.setAttribute('aria-label','Mãos para estudar');
+const modes=[['right','✋ Direita · roxo'],['left','✋ Esquerda · marrom'],['both','🙌 Duas mãos']];
+const realSelect=document.getElementById('handMode');
+modes.forEach(([value,label])=>{const b=document.createElement('button');b.textContent=label;b.onclick=()=>{realSelect.value=value;realSelect.dispatchEvent(new Event('change'));popup.hidden=true;handBtn.setAttribute('aria-expanded','false');syncHands()};popup.append(b)});
+function syncHands(){popup.querySelectorAll('button').forEach((b,i)=>b.classList.toggle('active-tool',modes[i][0]===realSelect.value));handBtn.textContent=realSelect.value==='both'?'🙌':realSelect.value==='left'?'✋':'🖐';handBtn.title='Mãos: '+realSelect.selectedOptions[0]?.textContent}
+handBtn.onclick=()=>{popup.hidden=!popup.hidden;handBtn.setAttribute('aria-expanded',String(!popup.hidden))};
+toolbar.append(handBtn);header.append(popup);syncHands();
+const orientation=document.getElementById('landscape');orientation.textContent='↔';orientation.title='Alternar orientação';orientation.setAttribute('aria-label','Alternar orientação da tela');toolbar.append(orientation);
+const focus=document.getElementById('focus');focus.textContent='✕';focus.title='Sair do estudo';focus.setAttribute('aria-label','Sair do estudo');toolbar.append(focus);
+const originalFocus=focus.onclick;focus.onclick=()=>{originalFocus();focus.textContent=document.body.classList.contains('focus-mode')?'✕':'⛶'};
+const originalPlay=playBtn.onclick;playBtn.onclick=()=>{originalPlay();playBtn.textContent=playing?'Ⅱ':'▶'};
+const originalAB=document.getElementById('repeatAB').onclick;document.getElementById('repeatAB').onclick=()=>{originalAB();document.getElementById('repeatAB').textContent=repeat?'↻':'↻'};
+document.getElementById('resetAB').addEventListener('click',()=>{playBtn.textContent=playing?'Ⅱ':'▶'});
+// Fullscreen is needed by Chrome Android for programmatic orientation lock; avoid it until the first attempt fails.
+let rotated=false;
+orientation.onclick=async()=>{try{if(rotated){screen.orientation?.unlock?.();if(document.fullscreenElement)await document.exitFullscreen();rotated=false;orientation.textContent='↔';return}
+try{await screen.orientation.lock('landscape')}catch(err){if(document.documentElement.requestFullscreen){await document.documentElement.requestFullscreen();await screen.orientation.lock('landscape')}else throw err}
+rotated=true;orientation.textContent='↕'}catch(err){rotated=false;orientation.textContent='↔';status('O Android bloqueou a rotação automática. Use o botão de rotação do sistema.')}};
+document.addEventListener('click',e=>{if(!popup.hidden&&!popup.contains(e.target)&&e.target!==handBtn){popup.hidden=true;handBtn.setAttribute('aria-expanded','false')}});
 })();
 </script></body></html>
