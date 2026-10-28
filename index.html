@@ -90,12 +90,46 @@ details summary{color:#c6b2ff;font-weight:600}
 .paper{border:1px solid #b5afc2;box-shadow:inset 0 2px 8px #00000014}
 .progress,input[type=range]{accent-color:#a78bfa}
 @media(max-width:600px){.library-item{padding:11px}.nonstudy .actions{gap:7px}header .logo{width:38px;height:38px}}
+
+/* Dark Piano 1.1 — actual responsive dashboard layout */
+:root{--violet:#9b74f4}
+body:not(.focus-mode) main{max-width:1540px;padding:clamp(10px,2vw,24px);display:grid;grid-template-columns:minmax(0,1.65fr) minmax(300px,1fr);gap:15px;align-items:start}
+body:not(.focus-mode) main>.study-section{grid-column:1;grid-row:1 / span 3}
+body:not(.focus-mode) main>.library-dashboard{grid-column:2;grid-row:1}
+body:not(.focus-mode) main>.import-dashboard{grid-column:2;grid-row:2}
+body:not(.focus-mode) main>.nonstudy:last-child{grid-column:2;grid-row:3}
+body:not(.focus-mode) main>section{margin:0;min-width:0}
+.library-dashboard h2,.import-dashboard h2{font-size:21px;display:flex;align-items:center;gap:10px}
+.dashboard-heading{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px}
+.dashboard-heading h2{margin:0}
+.library-dashboard #library{display:grid!important;margin-top:8px}
+.library-dashboard #library .library-item{display:grid;grid-template-columns:36px minmax(0,1fr) auto;gap:9px;align-items:center}
+.library-dashboard .library-item:before{content:'♫';display:grid;place-items:center;width:34px;height:38px;border-radius:10px;background:linear-gradient(140deg,#4c376f,#26233e);color:#c5a7ff;font-size:20px}
+.library-dashboard .library-item .detail{min-width:0}
+.library-dashboard .library-item .detail strong{overflow-wrap:anywhere}
+.library-dashboard .library-item .detail small{font-size:11px}
+.library-dashboard .library-item button,.library-dashboard .library-item .btn{font-size:12px;padding:9px}
+.library-dashboard .library-item button:last-child:not(.primary){grid-column:3;font-size:11px;background:transparent;border:0;color:#b8a8d6}
+.library-dashboard .library-item a.btn{font-size:11px}
+.library-dashboard #libraryHint{margin-top:8px}
+.import-dashboard #addPanel{display:block!important;border:1px dashed #6a578b;padding:14px}
+.import-dashboard #addPanel input{width:100%}
+.import-dashboard .filebtn{width:100%;text-align:center;padding:16px}
+.import-dashboard .actions button{flex:1;min-width:105px}
+.dashboard-sub{font-size:12px;color:#aea9c7;margin:5px 0 12px}
+.library-dashboard #addMusic,.library-dashboard #libraryToggle,.library-dashboard #demo{display:none!important}
+.library-dashboard #message{margin-top:12px}
+body:not(.focus-mode) .study-section>.actions:first-child{padding-bottom:10px}
+body:not(.focus-mode) #studyToolbar{gap:5px}
+body:not(.focus-mode) .study #sheet.paper{height:auto;min-height:295px;max-height:55vh}
+body:not(.focus-mode) .study #keys{height:clamp(110px,18vh,175px)}
+@media(max-width:900px){body:not(.focus-mode) main{display:flex;flex-direction:column;gap:13px}body:not(.focus-mode) main>.library-dashboard{order:1}body:not(.focus-mode) main>.import-dashboard{order:2}body:not(.focus-mode) main>.study-section{order:3}body:not(.focus-mode) main>.nonstudy:last-child{order:4}body:not(.focus-mode) main>section{width:100%}.library-dashboard .library-item{padding:11px}body:not(.focus-mode) .study #sheet.paper{max-height:44vh}}
 </style></head><body><header><div class="logo">🎹</div><div><h1>Paola Piano</h1><small>Suas músicas. Seu ritmo.</small></div></header><main>
 <section class="nonstudy"><div class="actions" id="installArea" style="margin-bottom:12px"><button class="primary" id="install" hidden>📲 Instalar aplicativo</button><span class="note" id="installHint">Para instalar com ícone, abra esta página publicada em HTTPS no Chrome Android.</span></div><h2>Minha biblioteca</h2><div class="actions"><button class="primary" id="addMusic" aria-expanded="false" aria-controls="addPanel">＋ Adicionar música</button><button id="libraryToggle">♫ Biblioteca</button><button id="demo" hidden>▶ Música de demonstração</button></div><div id="addPanel" class="add-panel" hidden><h3>Adicionar à biblioteca</h3><p class="note">Procure uma partitura disponibilizada legalmente, baixe o MIDI ou MusicXML na fonte e escolha o arquivo aqui. Depois ficará na sua biblioteca.</p><input id="query" type="search" placeholder="Nome da música (ex.: November Rain)" aria-label="Nome da música" value="November Rain"><div class="actions" style="margin-top:9px"><button id="mutopia">Pesquisar no Mutopia</button><button id="imslp">Pesquisar no IMSLP</button><button id="onlineSearch">Pesquisar MIDI na web</button></div><div class="actions" style="margin-top:14px"><label class="filebtn">📁 Escolher arquivo para salvar<input id="upload" type="file" accept=".mid,.midi,.xml,.musicxml"></label></div><p class="tip">A pesquisa abre um site externo; não baixa músicas automaticamente. O arquivo precisa estar autorizado para download e uso.</p></div><div id="library" class="library-list" hidden></div><p class="tip" id="libraryHint" hidden>Os arquivos importados ficam salvos neste navegador do celular (se o armazenamento estiver disponível). November Rain aparece como referência externa até você importar um arquivo autorizado.</p><div id="message" class="status" role="status">Pronto para começar.</div></section>
 <section class="study-section"><div class="actions" style="justify-content:space-between"><h2 style="margin:0" id="pieceTitle">Exercício de demonstração</h2><div class="actions"><span id="noteNow" class="chip">—</span><button id="landscape" aria-label="Solicitar tela horizontal">↔ Tela deitada</button><button id="focus" aria-label="Ativar modo estudo">⛶ Modo estudo</button></div></div>
 <div class="study"><div id="sheet" class="paper" aria-label="Partitura na parte superior"><div id="score"></div></div><div><h2 style="margin-bottom:5px">Teclado guiado <span class="chip">Dó3–Si5</span></h2><div id="keys" aria-label="Teclado virtual na parte inferior"></div></div><div class="transport"><button class="primary" id="play">▶ Tocar</button><button id="stop">■ Parar</button><span class="time" id="clock">0:00 / 0:00</span></div><input class="progress" type="range" id="seek" min="0" max="1000" value="0" aria-label="Posição da música"><label class="range">Velocidade <input id="speed" type="range" min="0.5" max="1.5" step="0.1" value="1"><strong id="speedLabel">1.0×</strong></label></div>
 </section>
-<section class="nonstudy"><details><summary>ⓘ Ajuda e informações</summary><p class="note">Paola Piano — Alfa 1.0.2</p><h2>Sobre esta versão</h2><p class="note">Funciona como protótipo diretamente no navegador, inclusive tocando as teclas virtuais. A reprodução usa amostras gravadas de piano de cauda quando carregadas. Se a conexão falhar, utiliza um sintetizador de reserva. Ainda não há reconhecimento do piano físico, login, sincronização da biblioteca entre aparelhos nem geração automática de partitura a partir de MP3. Para MusicXML completo, a biblioteca OpenSheetMusicDisplay é carregada pela internet.</p><p class="note">Áudio: Salamander Grand Piano, gravações de Alexander Holm, licença CC BY 3.0. Fonte: https://github.com/sfzinstruments/SalamanderGrandPiano. Samples servidos por Tone.js. É necessária conexão para o primeiro carregamento.</p><p class="source">Fontes de repertório: <a href="https://www.mutopiaproject.org/" target="_blank" rel="noopener">Mutopia Project</a> · <a href="https://imslp.org/" target="_blank" rel="noopener">IMSLP</a>.</p></details></section></main>
+<section class="nonstudy"><details><summary>ⓘ Ajuda e informações</summary><p class="note">Paola Piano — Alfa 1.1.0</p><h2>Sobre esta versão</h2><p class="note">Funciona como protótipo diretamente no navegador, inclusive tocando as teclas virtuais. A reprodução usa amostras gravadas de piano de cauda quando carregadas. Se a conexão falhar, utiliza um sintetizador de reserva. Ainda não há reconhecimento do piano físico, login, sincronização da biblioteca entre aparelhos nem geração automática de partitura a partir de MP3. Para MusicXML completo, a biblioteca OpenSheetMusicDisplay é carregada pela internet.</p><p class="note">Áudio: Salamander Grand Piano, gravações de Alexander Holm, licença CC BY 3.0. Fonte: https://github.com/sfzinstruments/SalamanderGrandPiano. Samples servidos por Tone.js. É necessária conexão para o primeiro carregamento.</p><p class="source">Fontes de repertório: <a href="https://www.mutopiaproject.org/" target="_blank" rel="noopener">Mutopia Project</a> · <a href="https://imslp.org/" target="_blank" rel="noopener">IMSLP</a>.</p></details></section></main>
 <script src="https://unpkg.com/opensheetmusicdisplay@1.9.0/build/opensheetmusicdisplay.min.js"></script><script>
 const $=id=>document.getElementById(id);let allNotes=[],handMode='both',notes=[],duration=0,playing=false,position=0,startAt=0,animation=0,audio,voices=[],scoreMode='simple',osmd=null,xmlContent=null;const names=['Dó','Dó♯','Ré','Ré♯','Mi','Fá','Fá♯','Sol','Sol♯','Lá','Lá♯','Si'];const noteName=n=>names[n%12]+(Math.floor(n/12)-1);const status=s=>$('message').textContent=s;const freq=n=>440*Math.pow(2,(n-69)/12);let speed=1;let db=null;const storeName='songs';const catalog=[{title:'November Rain — Piano Cover',artist:'Guns N’ Roses',url:'https://onlinesequencer.net/4793240'}];
 function initAudio(){audio??=new(window.AudioContext||window.webkitAudioContext)();if(audio.state==='suspended')audio.resume()}
@@ -249,5 +283,21 @@ const play=document.getElementById('play'),rep=document.getElementById('repeatAB
 const update=()=>{draw('play',playing?'pause':'play',playing?'Pausar':'Tocar');draw('repeatAB','repeat','Repetir');rep.classList.toggle('active-tool',rep.textContent.includes('sim'));draw('handsButton','hands','Mãos');draw('landscape','rotate','Girar');draw('focus','book','Estudo')};
 [play,rep,hand,rotate,focus,document.getElementById('stop'),document.getElementById('resetAB')].forEach(el=>el?.addEventListener('click',()=>queueMicrotask(update)));
 document.querySelector('.study-section').addEventListener('click',e=>{if(e.target.closest('button,input,select,label,.key'))return;queueMicrotask(update)});
+})();
+</script><script>
+(()=>{
+const main=document.querySelector('main'),library=document.querySelector('main > section.nonstudy'),study=document.querySelector('.study-section'),add=document.getElementById('addPanel'),list=document.getElementById('library');
+if(!main||!library||!study||!add||!list)return;
+library.classList.add('library-dashboard');
+const heading=library.querySelector('h2');heading.textContent='♫ Biblioteca de músicas';
+const sub=document.createElement('p');sub.className='dashboard-sub';sub.textContent='Suas partituras salvas e links de repertório.';heading.after(sub);
+const importSection=document.createElement('section');importSection.className='import-dashboard nonstudy';
+const importTitle=document.createElement('h2');importTitle.textContent='♬ Importar música';
+const importSub=document.createElement('p');importSub.className='dashboard-sub';importSub.textContent='Adicione arquivos MIDI ou MusicXML para estudar no Paola Piano.';
+importSection.append(importTitle,importSub,add);main.insertBefore(importSection,study);
+add.hidden=false;list.hidden=false;
+const demoBtn=document.createElement('button');demoBtn.className='primary';demoBtn.textContent='▶ Exercício para duas mãos';demoBtn.onclick=()=>document.getElementById('demo')?.click();
+const actions=document.createElement('div');actions.className='actions';actions.style.marginBottom='12px';actions.append(demoBtn);sub.after(actions);
+const style=document.createElement('style');style.textContent='.library-dashboard #library[hidden]{display:none!important}';document.head.append(style);
 })();
 </script></body></html>
